@@ -1,5 +1,6 @@
 
 import com.google.gson.Gson;
+import spark.Spark;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ public class SparkRestFull {
     public static void main(String[] args) {
 
         final ISiteService service = new SiteService();
+
+        Spark.port(8083);
 
         get("/sites", (req,res) -> {
             res.type("application/json");
