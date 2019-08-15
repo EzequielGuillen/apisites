@@ -1,0 +1,5 @@
+/target
+/.idea
+./src/test
+.DS_Store
+./src/.DS_Store
