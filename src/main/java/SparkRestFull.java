@@ -1,3 +1,4 @@
+import spark.Spark;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -11,7 +12,7 @@ public class SparkRestFull {
 
         final ISiteService service = new SiteService();
 
-
+        Spark.port(8083);
 
         get("/sites", (req,res) -> {
 
