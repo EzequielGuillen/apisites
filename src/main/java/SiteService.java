@@ -36,7 +36,7 @@ public class SiteService implements ISiteService {
 
         } catch (IOException e) {
             System.out.println(e.toString());
-            throw e;
+            return "";
         }
 
     }
@@ -59,9 +59,6 @@ public class SiteService implements ISiteService {
             System.out.println(ex.toString());
             throw ex;
 
-        } catch (IOException e) {
-            System.out.println(e.toString());
-            throw e;
         }
     }
 
@@ -90,9 +87,6 @@ public class SiteService implements ISiteService {
                 System.out.println(ex.toString());
                 throw ex;
 
-            } catch (IOException e){
-                System.out.println(e.toString());
-                throw e;
             }
         } else {
             return null;
