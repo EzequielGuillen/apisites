@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 
 import static spark.Spark.*;
 
@@ -20,11 +21,11 @@ public class SparkRestFull {
 
                 return service.getSites();
 
-            } catch (SocketException ex){
+            } catch (UnknownHostException ex){
 
                 res.status(503);
                 halt(res.status(), "{" +
-                        "\"message\": \"Server is Down\"," +
+                        "\"message\": \"Server is Down\"" +
                         "}");
                 return null;
 

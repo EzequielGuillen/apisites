@@ -1,21 +1,21 @@
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import org.eclipse.jetty.util.IO;
+import java.util.HashMap;
+import java.util.Map;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class SiteService implements ISiteService {
 
     private final ResourceBundle mybundle = ResourceBundle.getBundle("MyAPIs");
 
     @Override
-    public String getSites() throws SocketException,IOException {
+    public String getSites() throws UnknownHostException,IOException {
 
         Gson gson = new Gson();
         BufferedReader in = null;
@@ -25,11 +25,11 @@ public class SiteService implements ISiteService {
             in = createUrl(mybundle.getString("APISITE"));
 
             Site[] sites = gson.fromJson(in,Site[].class);
-            Sort(sites);
+            Arrays.sort(sites);
 
             return gson.toJson( sites );
 
-        } catch (SocketException ex) {
+        } catch (UnknownHostException ex) {
 
             System.out.println(ex.toString());
             throw ex;
@@ -50,7 +50,7 @@ public class SiteService implements ISiteService {
             in = createUrl(mybundle.getString("APISITE") + id + mybundle.getString("CATEGORIE"));
 
             Categorie[] categories = gson.fromJson(in, Categorie[].class);
-            Sort(categories);
+            Arrays.sort(categories);
 
             return gson.toJson(categories);
 
@@ -90,28 +90,6 @@ public class SiteService implements ISiteService {
             }
         } else {
             return null;
-        }
-
-    }
-
-
-
-
-
-    private static <T extends Comparable> void Sort(T[] array){
-
-        boolean sorted = false;
-        T temp;
-        while(!sorted) {
-            sorted = true;
-            for (int i = 0; i < array.length - 1; i++) {
-                if (array[i].compareTo( array[i+1])>0) {
-                    temp = array[i];
-                    array[i] = array[i+1];
-                    array[i+1] = temp;
-                    sorted = false;
-                }
-            }
         }
 
     }
