@@ -1,6 +1,3 @@
-import spark.HaltException;
-import spark.http.matching.Halt;
-
 import java.io.IOException;
 import java.net.SocketException;
 

@@ -7,15 +7,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class SiteService implements ISiteService {
 
+    private final ResourceBundle mybundle = ResourceBundle.getBundle("MyAPIs");
 
     @Override
     public String getSites() throws SocketException,IOException {
+
         Gson gson = new Gson();
         BufferedReader in = null;
+
         try {
-            in = createUrl("https://api.mercadolibre.com/sites");
+
+            in = createUrl(mybundle.getString("APISITE"));
 
             Site[] sites = gson.fromJson(in,Site[].class);
             Sort(sites);
@@ -40,7 +47,7 @@ public class SiteService implements ISiteService {
         BufferedReader in = null;
 
         try {
-            in = createUrl("https://api.mercadolibre.com/sites/" + id + "/categories");
+            in = createUrl(mybundle.getString("APISITE") + id + mybundle.getString("CATEGORIE"));
 
             Categorie[] categories = gson.fromJson(in, Categorie[].class);
             Sort(categories);
